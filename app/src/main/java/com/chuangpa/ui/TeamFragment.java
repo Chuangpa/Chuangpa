@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chuangpa.inf.ChuangpaFragment;
+import com.chuangpa.service.MainService;
 
 import chuangpa.com.chuangpa.MainActivity;
 import chuangpa.com.chuangpa.R;
@@ -31,7 +32,7 @@ public class TeamFragment extends MainActivity.PlaceholderFragment implements Ch
         if (v == null) {
 
             v = inflater.inflate(R.layout.fragment_team,container,false);
-
+            MainService.addFragment(this);
             initView(v);
         }
         // 缓存的v需要判断是否已经被加过parent，

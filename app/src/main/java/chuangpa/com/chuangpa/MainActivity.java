@@ -1,6 +1,7 @@
 package chuangpa.com.chuangpa;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.chuangpa.service.MainService;
 import com.chuangpa.ui.HomeFragment;
 import com.chuangpa.ui.IndividualcenterFragment;
 import com.chuangpa.ui.MessageFragment;
@@ -43,7 +45,9 @@ public class MainActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //启动服务
+        Intent intent = new Intent(MainActivity.this, MainService.class);
+        startService(intent);
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
