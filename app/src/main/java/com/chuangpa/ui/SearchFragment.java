@@ -1,6 +1,8 @@
 package com.chuangpa.ui;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +25,9 @@ public class SearchFragment extends MainActivity.PlaceholderFragment implements 
 
     @Override
     public void initView(View v) {
-
+        ActionBarActivity activity = (ActionBarActivity) getActivity();
+        ActionBar ab = activity.getSupportActionBar();
+        ab.show();
     }
 
     @Override

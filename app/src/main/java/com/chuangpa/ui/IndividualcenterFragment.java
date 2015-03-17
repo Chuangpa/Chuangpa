@@ -1,12 +1,18 @@
 package com.chuangpa.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.chuangpa.inf.ChuangpaFragment;
 import com.chuangpa.service.MainService;
+import com.chuangpa.view.ObservableListView;
+import com.chuangpa.view.ObservableScrollViewCallbacks;
+import com.chuangpa.view.ScrollState;
 
 import chuangpa.com.chuangpa.MainActivity;
 import chuangpa.com.chuangpa.R;
@@ -14,8 +20,10 @@ import chuangpa.com.chuangpa.R;
 /**
  * Created by Lan on 2015-03-16.
  */
-public class IndividualcenterFragment extends MainActivity.PlaceholderFragment implements ChuangpaFragment {
+public class IndividualcenterFragment extends MainActivity.PlaceholderFragment implements ChuangpaFragment,ObservableScrollViewCallbacks{
     private View v;
+    private boolean initFlag;
+    public static final String FRAGMENT_TAG = "actionBarControl";
     @Override
     public void refresh(Object... params) {
 
@@ -23,12 +31,25 @@ public class IndividualcenterFragment extends MainActivity.PlaceholderFragment i
 
     @Override
     public void initView(View v) {
+        ObservableListView listView = (ObservableListView) v.findViewById(R.id.list);
+//        listView.setScrollViewCallbacks(this);
+//        setDummyData(listView);
+//
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Intent intent = new Intent(getActivity(),IndividualcenterActivity.class);
+        getActivity().startActivity(intent);
+        MainActivity.DrawerItemSelected(1);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        ActionBarActivity activity = (ActionBarActivity) getActivity();
+        ActionBar ab = activity.getSupportActionBar();
+        ab.show();
         if (v == null) {
 
             v = inflater.inflate(R.layout.fragment_individualcenter,container,false);
@@ -43,4 +64,34 @@ public class IndividualcenterFragment extends MainActivity.PlaceholderFragment i
         }
         return v;
     }
+
+    @Override
+    public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
+
+    }
+
+    @Override
+    public void onDownMotionEvent() {
+
+    }
+
+    @Override
+    public void onUpOrCancelMotionEvent(ScrollState scrollState) {
+        ActionBarActivity activity = (ActionBarActivity) getActivity();
+        if (activity == null) {
+            return;
+        }
+        ActionBar ab = activity.getSupportActionBar();
+        if (scrollState == ScrollState.UP) {
+            if (ab.isShowing()) {
+                    ab.hide();
+            }
+        } else if (scrollState == ScrollState.DOWN) {
+
+            if (!ab.isShowing()) {
+                ab.show();
+            }
+        }
+    }
+
 }

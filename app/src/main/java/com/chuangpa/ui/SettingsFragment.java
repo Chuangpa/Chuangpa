@@ -1,6 +1,8 @@
 package com.chuangpa.ui;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +20,9 @@ public class SettingsFragment extends MainActivity.PlaceholderFragment implement
     private View v;
     @Override
     public void refresh(Object... params) {
-
+        ActionBarActivity activity = (ActionBarActivity) getActivity();
+        ActionBar ab = activity.getSupportActionBar();
+        ab.show();
     }
 
     @Override

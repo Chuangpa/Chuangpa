@@ -50,7 +50,7 @@ public class DrawerListAdapter extends BaseAdapter {
 		itemTitle = (TextView) convertView.findViewById(R.id.item_title);
 		itemIcon = (ImageView) convertView.findViewById(R.id.item_icon);
 		itemTitle.setText(item.getTitle());
-		itemIcon.setBackground(item.getIcon());
+		itemIcon.setBackgroundDrawable(item.getIcon());
 		return convertView;
 	}
 

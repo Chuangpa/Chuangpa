@@ -4,4 +4,9 @@
     <drawable name="activated_background_color">#15c7b1</drawable>
     <color name="color_hei_8">#00000000</color>
     <color name="transparent">@color/color_hei_8</color>
+
+    <color name="primary">#009688</color>
+    <color name="primaryDark">#00796b</color>
+    <color name="accent">#eeff41</color>
+    <color name="accentLight">#F4FF81</color>
 </resources>
