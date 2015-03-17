@@ -16,6 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.chuangpa.ui.IndividualcenterActivity"
+            android:theme="@style/AppTheme"></activity>
         <service
             android:name="com.chuangpa.service.MainService"></service>
     </application>
