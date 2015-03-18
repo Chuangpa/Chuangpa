@@ -1,4 +1,24 @@
-<com.chuangpa.view.ObservableListView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/list"
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:path="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <com.chuangpa.view.ObservableListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <com.chuangpa.view.PathGroup
+        android:id="@+id/path_group"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        path:numColumns="3"
+        path:btnBottomMargin="40dp"
+        path:btnRightMargin="40dp"
+        path:showColor="#dd000000"
+        path:hideColor="#ff15c7b1"
+        >
+    </com.chuangpa.view.PathGroup>
+</RelativeLayout>
