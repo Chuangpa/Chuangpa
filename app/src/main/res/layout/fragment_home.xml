@@ -5,11 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent">
-
-    <com.chuangpa.view.ObservableListView
-        android:id="@+id/list"
+    <com.chuangpa.view.RefreshLayout
+        android:id="@+id/swipe_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+        <com.chuangpa.view.ObservableListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.chuangpa.view.RefreshLayout>
     <com.chuangpa.view.PathGroup
         android:id="@+id/path_group"
         android:layout_width="match_parent"

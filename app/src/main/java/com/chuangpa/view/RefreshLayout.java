@@ -170,9 +170,10 @@ public class RefreshLayout extends SwipeRefreshLayout implements OnScrollListene
     public void setLoading(boolean loading) {
         isLoading = loading;
         if (isLoading) {
-            mListView.addFooterView(mListViewFooter);
+//            mListView.addFooterView(mListViewFooter);
         } else {
-            mListView.removeFooterView(mListViewFooter);
+//            mListView.removeFooterView(mListViewFooter);
+//            mListView.setRefreshing(mListViewFooter);
             mYDown = 0;
             mLastY = 0;
         }

@@ -39,7 +39,7 @@ public class ObservableListView extends ListView implements Scrollable {
     private int mPrevScrollY;
     private int mScrollY;
     private SparseIntArray mChildrenHeights;
-
+    
     // Fields that don't need to be saved onSaveInstanceState
     private ObservableScrollViewCallbacks mCallbacks;
     private ScrollState mScrollState;

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -78,6 +79,21 @@ public class HomeFragment extends MainActivity.PlaceholderFragment implements Ch
                 return pathGroup.getIsShow();
             }
         });
+
+            pathGroup.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    if(pathGroup.mStatus==0) {
+                        pathGroup.exeHide();
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }
+            });
+
+
+
         pathGroup.setOnPathGroupListener(new PathGroup.OnPathGroupListener() {
             @Override
             public void onItemClick(int index) {
@@ -88,9 +104,11 @@ public class HomeFragment extends MainActivity.PlaceholderFragment implements Ch
 
             @Override
             public void onPathHide(int index) {
-
+                pathGroup.exeHide();
             }
         });
+
+
 
         listView.setScrollViewCallbacks(this);
 //        setDummyData(listView);
@@ -106,7 +124,7 @@ public class HomeFragment extends MainActivity.PlaceholderFragment implements Ch
                 android.R.layout.simple_list_item_1,
                 datas);
 
-        listView.setAdapter(adapter);
+
 
         // 获取RefreshLayout实例
         final RefreshLayout myRefreshListView = (RefreshLayout)
@@ -156,12 +174,13 @@ public class HomeFragment extends MainActivity.PlaceholderFragment implements Ch
                         adapter.notifyDataSetChanged();
                         // 加载完后调用该方法
                         myRefreshListView.setLoading(false);
+
                     }
                 }, 1500);
 
             }
         });
-
+        listView.setAdapter(adapter);
     }
 
     @Override
