@@ -12,7 +12,8 @@
         <com.chuangpa.view.ObservableListView
             android:id="@+id/list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:fastScrollEnabled="true"/>
     </com.chuangpa.view.RefreshLayout>
     <com.chuangpa.view.PathGroup
         android:id="@+id/path_group"

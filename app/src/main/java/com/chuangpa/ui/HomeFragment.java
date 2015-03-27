@@ -1,5 +1,8 @@
 package com.chuangpa.ui;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -11,11 +14,14 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import com.chuangpa.adapter.HomeListViewAdapter;
+import com.chuangpa.bean.HomeInfo;
 import com.chuangpa.inf.ChuangpaFragment;
 import com.chuangpa.service.MainService;
 import com.chuangpa.view.ObservableListView;
@@ -28,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import chuangpa.com.chuangpa.MainActivity;
 import chuangpa.com.chuangpa.R;
@@ -41,6 +48,11 @@ public class HomeFragment extends MainActivity.PlaceholderFragment implements Ch
     public static final String FRAGMENT_TAG = "actionBarControl";
     private static final Integer[] IMAGES = {R.drawable.widget_round_icon_red_heart,R.drawable.widget_round_icon_blue_heart,R.drawable.widget_round_icon_list};
     private static final String[] ADAPTER = {"选项一", "选项二", "选项三"};
+    private String items[] = {"联系" , "分享到新浪微博", "分享到QQ", "收藏", "举报" };
+
+    private ArrayList<HomeInfo> list;
+    private  HomeListViewAdapter mAdapter;
+
     @Override
     public void refresh(Object... params) {
 
@@ -48,7 +60,7 @@ public class HomeFragment extends MainActivity.PlaceholderFragment implements Ch
 
     @Override
     public void initView(View v) {
-        ObservableListView listView = (ObservableListView) v.findViewById(R.id.list);
+        final ObservableListView listView = (ObservableListView) v.findViewById(R.id.list);
 
         final PathGroup pathGroup = (PathGroup) v.findViewById(R.id.path_group);
 
@@ -130,6 +142,20 @@ public class HomeFragment extends MainActivity.PlaceholderFragment implements Ch
         final RefreshLayout myRefreshListView = (RefreshLayout)
                 v.findViewById(R.id.swipe_layout);
 
+
+
+        list = new ArrayList<HomeInfo>();
+        for(int i =0;i<=20;i++){
+
+            HomeInfo homeInfo = new HomeInfo("用户"+i,"ic_lancher.png","2015-3-28",getResources().getString(R.string.test_content),i%3);
+
+            list.add(homeInfo);
+        }
+
+
+        mAdapter = new HomeListViewAdapter(getActivity(),listView,list);
+
+
         // 设置下拉刷新时的颜色值,颜色值需要定义在xml中
         myRefreshListView
                 .setColorScheme(R.color.primaryDark,
@@ -149,8 +175,14 @@ public class HomeFragment extends MainActivity.PlaceholderFragment implements Ch
                     @Override
                     public void run() {
                         // 更新数据
-                        datas.add(new Date().toGMTString());
-                        adapter.notifyDataSetChanged();
+
+
+                        ArrayList<HomeInfo> mList = new ArrayList<HomeInfo>();
+                        HomeInfo homeInfo = new HomeInfo("用户-1","ic_lancher.png","2015-3-28",getResources().getString(R.string.test_content2),1);
+                        mList.add(homeInfo);
+                        mList.addAll(list);
+                        list = mList;
+                        mAdapter.refreshData(mList);
                         // 更新完后调用该方法结束刷新
                         myRefreshListView.setRefreshing(false);
                     }
@@ -170,8 +202,9 @@ public class HomeFragment extends MainActivity.PlaceholderFragment implements Ch
 
                     @Override
                     public void run() {
-                        datas.add(new Date().toGMTString());
-                        adapter.notifyDataSetChanged();
+
+                        list.add(new HomeInfo("用户-1","ic_lancher.png","2015-3-28",getResources().getString(R.string.test_content2),2));
+                        mAdapter.refreshData(list);
                         // 加载完后调用该方法
                         myRefreshListView.setLoading(false);
 
@@ -180,7 +213,58 @@ public class HomeFragment extends MainActivity.PlaceholderFragment implements Ch
 
             }
         });
-        listView.setAdapter(adapter);
+
+
+
+        listView.setAdapter(mAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getActivity(),"第"+(position+1)+"条消息",Toast.LENGTH_SHORT).show();
+            }
+        });
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(
+                        getActivity());
+                builder.setItems(items, new Dialog.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface arg0, int id) {
+                        // TODO Auto-generated method stub
+                        switch (id) {
+                            case 0:
+
+                                break;
+                            case 1:
+                                //新浪微博分享
+                                break;
+                            case 2:
+                                //QQ分享
+
+                                break;
+                            case 3:
+                                //收藏
+                                break;
+                            case 4:
+
+                                break;
+                        }
+                    }
+                });
+                Dialog dialog = builder.create();
+                dialog.show();
+                return false;
+                }
+        });
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @Override

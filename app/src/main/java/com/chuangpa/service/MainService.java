@@ -14,6 +14,7 @@ import com.chuangpa.util.Task;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -146,6 +147,10 @@ public class MainService extends Service implements Runnable {
         }
 
         handler.sendMessage(msg);
+//        handler.post()
+
+//        Field field = android.support.v7.appcompat.R.drawable.class.getDeclaredField()
+
         ///latitude:29.60848
         ///longitude:105.071981
     }
