@@ -46,8 +46,8 @@ public class HomeFragment extends MainActivity.PlaceholderFragment implements Ch
     private View v;
     private boolean initFlag;
     public static final String FRAGMENT_TAG = "actionBarControl";
-    private static final Integer[] IMAGES = {R.drawable.widget_round_icon_red_heart,R.drawable.widget_round_icon_blue_heart,R.drawable.widget_round_icon_list};
-    private static final String[] ADAPTER = {"选项一", "选项二", "选项三"};
+    private static final Integer[] IMAGES = {R.drawable.item_btn_idea,R.drawable.item_btn_diary,R.drawable.item_btn_cteam};
+    private static final String[] ADAPTER = {"写点子", "写日志", "建团队"};
     private String items[] = {"联系" , "分享到新浪微博", "分享到QQ", "收藏", "举报" };
 
     private ArrayList<HomeInfo> list;
