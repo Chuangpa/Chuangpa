@@ -58,6 +58,13 @@ public class MainService extends Service implements Runnable {
         fragments.add(fragment);
     }
 
+    /**
+     * 移除一个Fragment对象
+     * @param fragment
+     */
+    public static void removeFragment(ChuangpaFragment fragment){
+        fragments.remove(fragment);
+    }
 
 
     private ChuangpaFragment getFragmentByName(String name) {
